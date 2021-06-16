@@ -63,6 +63,8 @@ items:
       app: rhcos-redirector
       app.kubernetes.io/component: rhcos-redirector
       app.kubernetes.io/instance: rhcos-redirector
+        # served by the "compat" ingress controller
+      type: rhcos-redirector-compat
     managedFields:
     - apiVersion: route.openshift.io/v1
       fieldsType: FieldsV1

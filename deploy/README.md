@@ -10,6 +10,13 @@ objects here, so it could be replicated in any namespace for testing.
     oc apply -f deploy/builds.yaml
     oc apply -f deploy/app.yaml
     oc apply -f deploy/routes.yaml
+    oc apply -f deploy/ingress-controller.yaml
 
-(Note you'd probably want to change routes to avoid being masked by the
-production deployment.)
+Patch the default ingress controller (`ingresscontroller/default -n openshift-ingress-operator`) with:
+
+    spec:
+      routeSelector:
+        matchExpressions:
+        - {key: type, operator: NotIn, values: ["rhcos-redirector-compat"]}
+
+(Note in a dev workspace you'd want your own route and no custom ingress controller.)
